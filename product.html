@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Product - MARWAT HOMEMADE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- product page content -->
+  <div class="product-container">
+    <a class="back-link" href="index.html" id="backBtn">← BACK TO MENU</a>
+
+    <div class="product-card">
+      <div class="product-image-wrap">
+        <img id="productImage" src="" alt="Product Image">
+      </div>
+      <div class="product-info">
+        <h1 id="productName">ITEM NAME</h1>
+        <div id="productPrice" class="price">PRICE PKR</div>
+
+        <p class="address caps">SECTOR F10, STREET 21, HOUSE NUMBER # 705, PHASE 6, HAYATABAD, PESHAWAR</p>
+
+        <div class="order-wrap">
+          <img id="orderNowImg" src="https://www.pngmart.com/files/3/Order-Now-PNG-HD.png" alt="Order Now" class="order-now">
+        </div>
+      </div>
+    </div>
+
+    <div class="product-footer">
+      <p>Click <strong>ORDER NOW</strong> to send your order via WhatsApp.</p>
+    </div>
+  </div>
+
+  <script>
+    // Read query params and fill product info
+    (function(){
+      function param(name){
+        const url = new URL(window.location.href);
+        return url.searchParams.get(name);
+      }
+      const name = param('name') || 'ITEM';
+      const price = param('price') || '—';
+      const img = param('img') || '';
+
+      document.getElementById('productName').textContent = name.toUpperCase();
+      document.getElementById('productPrice').textContent = price;
+      const pImg = document.getElementById('productImage');
+      if(img) pImg.src = img;
+
+      // Order Now click -> open WhatsApp with prefilled message
+      const orderImg = document.getElementById('orderNowImg');
+      orderImg.style.cursor = 'pointer';
+      orderImg.addEventListener('click', () => {
+        const phone = '923125765214';
+        const text = `Hi, I want to order ${name}`;
+        const url = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(text);
+        window.open(url, '_blank');
+      });
+
+      // Back to menu
+      document.getElementById('backBtn').addEventListener('click', function(e){
+        // default will navigate back; allow it
+      });
+    })();
+  </script>
+</body>
+</html>
